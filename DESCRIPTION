@@ -1,0 +1,16 @@
+Package: mops
+Type: Package
+Title: Matrix Operations
+Version: 0.1-0
+Description: TODO
+License: BSD 2-clause License + file LICENSE
+Depends:
+    R (>= 3.1.0)
+NeedsCompilation: yes
+ByteCompile: yes
+URL: https://github.com/wrathematics/mops
+BugReports: https://github.com/wrathematics/mops/issues
+Authors@R: c(person("Drew", "Schmidt", role=c("aut", "cre"),
+    email="wrathematics@gmail.com"))
+Maintainer: Drew Schmidt <wrathematics@gmail.com>
+RoxygenNote: 5.0.1

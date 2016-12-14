@@ -1,0 +1,9 @@
+*~
+*.swp
+
+*.status
+
+src/*.o
+src/*.so
+
+src/config.h
