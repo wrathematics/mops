@@ -2,7 +2,7 @@ Package: mops
 Type: Package
 Title: Matrix Operations
 Version: 0.1-0
-Description: TODO
+Description: Optimized matrix operations, such as row/col sums.
 License: BSD 2-clause License + file LICENSE
 Depends:
     R (>= 3.1.0)

@@ -1,7 +1,7 @@
 #' mops: Matrix Operations
 #' 
 #' @description
-#' TODO
+#' Optimized matrix operations, such as row/col sums.
 #' 
 #' @useDynLib mops, R_col_sums, R_row_sums
 #' 

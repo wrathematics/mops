@@ -5,7 +5,7 @@
 \alias{mops-package}
 \title{mops: Matrix Operations}
 \description{
-TODO
+Optimized matrix operations, such as row/col sums.
 }
 \author{
 Drew Schmidt

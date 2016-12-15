@@ -6,6 +6,7 @@
 * **Author:** Drew Schmidt
 
 
+Optimized matrix operations, such as row/col sums.
 
 ```r
 library(rbenchmark)
