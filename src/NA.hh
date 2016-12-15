@@ -2,7 +2,12 @@
 #define MOPS_NA_HH_
 
 #include <math.h>
+
 #include <stdint.h>
+#ifndef INT32_MIN
+#define   INT32_MAX   0x7fffffffL 
+#define   INT32_MIN   (-INT32_MAX - 1L)
+#endif
 
 static inline bool check_na(double val)
 {
