@@ -1,7 +1,7 @@
 library(mops)
 set.seed(12345)
 
-test = function(x, na.rm) stopifnot(all.equal(colSums(x, na.rm), col_sums(x, na.rm)))
+test = function(x, na.rm) stopifnot(all.equal(rowSums(x, na.rm), row_sums(x, na.rm)))
 m = 30
 n = 10
 x = matrix(rnorm(m*n), m, n)
