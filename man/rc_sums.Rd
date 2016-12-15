@@ -10,6 +10,11 @@ col_sums(x, na.rm = FALSE)
 
 row_sums(x, na.rm = FALSE)
 }
+\arguments{
+\item{x}{A numeric (integer or double) or logical matrix.}
+
+\item{na.rm}{Should \code{NA} values be removed?}
+}
 \description{
 Optimized versions of R's \code{rowSums()} and \code{colSums()}.
 }

@@ -2,6 +2,11 @@
 #' 
 #' Optimized versions of R's \code{rowSums()} and \code{colSums()}.
 #' 
+#' @param x
+#' A numeric (integer or double) or logical matrix.
+#' @param na.rm
+#' Should \code{NA} values be removed?
+#' 
 #' @name rc_sums
 #' @rdname rc_sums
 NULL
