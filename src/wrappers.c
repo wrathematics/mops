@@ -9,9 +9,11 @@
 #define INT(x) INTEGER(x)[0]
 #define DBL(x) REAL(x)[0]
 
+#define CHECK_IS_MATRIX(x) \
+  if (!isMatrix(x)){error("argument '" #x "' must be a matrix");}
+
 #define CHECK_IS_FLAG(x) \
-  if (TYPEOF(x) != LGLSXP || LENGTH(x) != 1){ \
-  error("argument 'narm' must be a flag"); }
+  if (TYPEOF(x) != LGLSXP || LENGTH(x) != 1){error("argument '" #x "' must be a flag");}
 
 #define THROW_TYPE_ERR error("argument 'x' must be numeric or logical")
 
@@ -44,6 +46,7 @@ switch (TYPEOF(x)){ \
 SEXP R_col_sums(SEXP x, SEXP narm)
 {
   SEXP ret;
+  CHECK_IS_MATRIX(x);
   const int m = nrows(x);
   const int n = ncols(x);
   
@@ -60,6 +63,7 @@ SEXP R_col_sums(SEXP x, SEXP narm)
 SEXP R_row_sums(SEXP x, SEXP narm)
 {
   SEXP ret;
+  CHECK_IS_MATRIX(x);
   const int m = nrows(x);
   const int n = ncols(x);
   
