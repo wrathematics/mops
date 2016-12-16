@@ -13,3 +13,8 @@ test(x, TRUE)
 x[c(1, 7, 99)] = NA
 test(x, TRUE)
 test(t(x), TRUE)
+
+
+storage.mode(x) = "integer"
+test(x, FALSE)
+test(t(x), FALSE)
