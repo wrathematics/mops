@@ -9,6 +9,7 @@
 #define   INT32_MIN   (-INT32_MAX - 1L)
 #endif
 
+
 static inline bool check_na(double val)
 {
   // Assumes your compiler supports IEEE 754. If it doesn't, never use your "computer" for numerics.
