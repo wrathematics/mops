@@ -58,8 +58,6 @@ SEXP R_col_sums(SEXP x, SEXP narm)
   return ret;
 }
 
-
-
 SEXP R_row_sums(SEXP x, SEXP narm)
 {
   SEXP ret;
@@ -70,6 +68,64 @@ SEXP R_row_sums(SEXP x, SEXP narm)
   CHECK_IS_FLAG(narm);
   NEWVEC(m);
   CALLFUN(row_sums);  
+  
+  UNPROTECT(1);
+  return ret;
+}
+
+
+
+SEXP R_col_means(SEXP x, SEXP narm)
+{
+  SEXP ret;
+  CHECK_IS_MATRIX(x);
+  const int m = nrows(x);
+  const int n = ncols(x);
+  
+  CHECK_IS_FLAG(narm);
+  PROTECT(ret = allocVector(REALSXP, n));
+  switch (TYPEOF(x))
+  {
+    case LGLSXP:
+    case INTSXP:
+      col_means_int(LGL(narm), m, n, INTP(x), DBLP(ret));
+      break;
+    case REALSXP:
+      col_means_dbl(LGL(narm), m, n, DBLP(x), DBLP(ret));
+      break;
+    default:
+      THROW_TYPE_ERR;
+  }
+  
+  UNPROTECT(1);
+  return ret;
+}
+
+SEXP R_row_means(SEXP x, SEXP narm)
+{
+  SEXP ret;
+  int check;
+  CHECK_IS_MATRIX(x);
+  const int m = nrows(x);
+  const int n = ncols(x);
+  
+  CHECK_IS_FLAG(narm);
+  PROTECT(ret = allocVector(REALSXP, m));
+  switch (TYPEOF(x))
+  {
+    case LGLSXP:
+    case INTSXP:
+      check = row_means_int(LGL(narm), m, n, INTP(x), DBLP(ret));
+      break;
+    case REALSXP:
+      check = row_means_dbl(LGL(narm), m, n, DBLP(x), DBLP(ret));
+      break;
+    default:
+      THROW_TYPE_ERR;
+  } 
+  
+  if (check)
+    error("unable to allocated needed memory (%d*4 bytes)", m);
   
   UNPROTECT(1);
   return ret;
