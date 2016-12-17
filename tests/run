@@ -1,0 +1,5 @@
+#!/bin/sh
+
+for f in `ls *.r`; do
+  r $f
+done
