@@ -15,7 +15,7 @@ static inline int row_sums_narm(cint m, cint n, const T *const restrict x, U *co
   
   for (int j=0; j<n; j++)
   {
-    SAFE_FOR_SIMD
+    #pragma omp parallel for if(m>=OMP_MIN_SIZE)
     for (int i=0; i<m; i++)
     {
       if (!check_na(x[i + m*j]))
@@ -32,7 +32,7 @@ static inline int row_sums_dbl_nonarm(cint m, cint n, const double *const restri
   
   for (int j=0; j<n; j++)
   {
-    SAFE_FOR_SIMD
+    #pragma omp parallel for if(m>=OMP_MIN_SIZE)
     for (int i=0; i<m; i++)
       ret[i] += x[i + m*j];
   }
@@ -47,7 +47,7 @@ static inline int row_sums_int_nonarm(cint m, cint n, const int *const restrict 
   
   for (int j=0; j<n; j++)
   {
-    SAFE_FOR_SIMD
+    #pragma omp parallel for if(m>=OMP_MIN_SIZE)
     for (int i=0; i<m; i++)
     {
       if (!check_na(x[i + m*j]) && !check_na(ret[i]))
@@ -75,7 +75,7 @@ static inline int row_means_narm(cint m, cint n, const T *const restrict x, doub
   
   for (int j=0; j<n; j++)
   {
-    SAFE_FOR_SIMD
+    #pragma omp parallel for if(m>=OMP_MIN_SIZE)
     for (int i=0; i<m; i++)
     {
       if (!check_na(x[i + m*j]))
