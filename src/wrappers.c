@@ -29,7 +29,7 @@
     default: \
       THROW_TYPE_ERR;}
 
-#define CALLFUN(fun) \
+#define CALLFUN_NA(fun) \
 switch (TYPEOF(x)){ \
   case LGLSXP: \
   case INTSXP: \
@@ -37,6 +37,18 @@ switch (TYPEOF(x)){ \
     break; \
   case REALSXP: \
     fun ## _dbl(LGL(narm), m, n, DBLP(x), DBLP(ret)); \
+    break; \
+  default: \
+    THROW_TYPE_ERR;}
+
+#define CALLFUN(fun) \
+switch (TYPEOF(x)){ \
+  case LGLSXP: \
+  case INTSXP: \
+    fun ## _int(m, n, INTP(x), INTP(ret)); \
+    break; \
+  case REALSXP: \
+    fun ## _dbl(m, n, DBLP(x), DBLP(ret)); \
     break; \
   default: \
     THROW_TYPE_ERR;}
@@ -52,7 +64,7 @@ SEXP R_col_sums(SEXP x, SEXP narm)
   
   CHECK_IS_FLAG(narm);
   NEWVEC(n);
-  CALLFUN(col_sums);
+  CALLFUN_NA(col_sums);
   
   UNPROTECT(1);
   return ret;
@@ -67,7 +79,7 @@ SEXP R_row_sums(SEXP x, SEXP narm)
   
   CHECK_IS_FLAG(narm);
   NEWVEC(m);
-  CALLFUN(row_sums);  
+  CALLFUN_NA(row_sums);
   
   UNPROTECT(1);
   return ret;
@@ -126,6 +138,64 @@ SEXP R_row_means(SEXP x, SEXP narm)
   
   if (check)
     error("unable to allocated needed memory (%d*4 bytes)", m);
+  
+  UNPROTECT(1);
+  return ret;
+}
+
+
+
+SEXP R_col_mins(SEXP x)
+{
+  SEXP ret;
+  CHECK_IS_MATRIX(x);
+  const int m = nrows(x);
+  const int n = ncols(x);
+  
+  NEWVEC(n);
+  CALLFUN(col_mins);
+  
+  UNPROTECT(1);
+  return ret;
+}
+
+SEXP R_col_maxs(SEXP x)
+{
+  SEXP ret;
+  CHECK_IS_MATRIX(x);
+  const int m = nrows(x);
+  const int n = ncols(x);
+  
+  NEWVEC(n);
+  CALLFUN(col_maxs);
+  
+  UNPROTECT(1);
+  return ret;
+}
+
+SEXP R_row_mins(SEXP x)
+{
+  SEXP ret;
+  CHECK_IS_MATRIX(x);
+  const int m = nrows(x);
+  const int n = ncols(x);
+  
+  NEWVEC(m);
+  CALLFUN(row_mins);
+  
+  UNPROTECT(1);
+  return ret;
+}
+
+SEXP R_row_maxs(SEXP x)
+{
+  SEXP ret;
+  CHECK_IS_MATRIX(x);
+  const int m = nrows(x);
+  const int n = ncols(x);
+  
+  NEWVEC(m);
+  CALLFUN(row_maxs);
   
   UNPROTECT(1);
   return ret;
