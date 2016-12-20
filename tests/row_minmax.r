@@ -1,34 +1,34 @@
 library(mops)
 set.seed(12345)
 
-rowMins = function(x) apply(x, MARGIN=1, min, na.rm=TRUE)
-mins = function(x) stopifnot(all.equal(rowMins(x), row_mins(x)))
+rowMins = function(x, na.rm) apply(x, MARGIN=1, min, na.rm=na.rm)
+mins = function(x, na.rm) stopifnot(all.equal(rowMins(x, na.rm), row_mins(x, na.rm)))
 
-rowMaxs = function(x) apply(x, MARGIN=1, max, na.rm=TRUE)
-maxs = function(x) stopifnot(all.equal(rowMaxs(x), row_maxs(x)))
+rowMaxs = function(x, na.rm) apply(x, MARGIN=1, max, na.rm=na.rm)
+maxs = function(x, na.rm) stopifnot(all.equal(rowMaxs(x, na.rm), row_maxs(x, na.rm)))
 
 m = 30
 n = 10
 x = matrix(rnorm(m*n, 1000, 200), m, n)
 
-mins(x)
-mins(t(x))
+mins(x, FALSE)
+mins(t(x), FALSE)
 
-maxs(x)
-maxs(t(x))
+maxs(x, FALSE)
+maxs(t(x), FALSE)
 
 x[c(1, 7, 99)] = NA
-mins(x)
-mins(t(x))
+mins(x, TRUE)
+mins(t(x), TRUE)
 
-maxs(x)
-maxs(t(x))
+maxs(x, TRUE)
+maxs(t(x), TRUE)
 
 
 
 storage.mode(x) = "integer"
-mins(x)
-mins(t(x))
+mins(x, TRUE)
+mins(t(x), TRUE)
 
-maxs(x)
-maxs(t(x))
+maxs(x, TRUE)
+maxs(t(x), TRUE)

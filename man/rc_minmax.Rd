@@ -8,19 +8,20 @@
 \alias{row_mins}
 \title{Matrix Row/Col Min/Maxes}
 \usage{
-col_mins(x)
+col_mins(x, na.rm = FALSE)
 
-row_mins(x)
+row_mins(x, na.rm = FALSE)
 
-col_maxs(x)
+col_maxs(x, na.rm = FALSE)
 
-row_maxs(x)
+row_maxs(x, na.rm = FALSE)
 }
 \arguments{
 \item{x}{A numeric (integer or double) or logical matrix.}
+
+\item{na.rm}{Should \code{NA} values be removed?}
 }
 \description{
 Row/Column minimum/maximum values. Analogues of e.g. \code{colSums()} and \code{rowSums()}.
-The functions handle \code{NA}'s appropriately.
 }
 

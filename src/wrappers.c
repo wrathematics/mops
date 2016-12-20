@@ -145,57 +145,61 @@ SEXP R_row_means(SEXP x, SEXP narm)
 
 
 
-SEXP R_col_mins(SEXP x)
+SEXP R_col_mins(SEXP x, SEXP narm)
 {
   SEXP ret;
   CHECK_IS_MATRIX(x);
   const int m = nrows(x);
   const int n = ncols(x);
   
+  CHECK_IS_FLAG(narm);
   NEWVEC(n);
-  CALLFUN(col_mins);
+  CALLFUN_NA(col_mins);
   
   UNPROTECT(1);
   return ret;
 }
 
-SEXP R_col_maxs(SEXP x)
+SEXP R_col_maxs(SEXP x, SEXP narm)
 {
   SEXP ret;
   CHECK_IS_MATRIX(x);
   const int m = nrows(x);
   const int n = ncols(x);
   
+  CHECK_IS_FLAG(narm);
   NEWVEC(n);
-  CALLFUN(col_maxs);
+  CALLFUN_NA(col_maxs);
   
   UNPROTECT(1);
   return ret;
 }
 
-SEXP R_row_mins(SEXP x)
+SEXP R_row_mins(SEXP x, SEXP narm)
 {
   SEXP ret;
   CHECK_IS_MATRIX(x);
   const int m = nrows(x);
   const int n = ncols(x);
   
+  CHECK_IS_FLAG(narm);
   NEWVEC(m);
-  CALLFUN(row_mins);
+  CALLFUN_NA(row_mins);
   
   UNPROTECT(1);
   return ret;
 }
 
-SEXP R_row_maxs(SEXP x)
+SEXP R_row_maxs(SEXP x, SEXP narm)
 {
   SEXP ret;
   CHECK_IS_MATRIX(x);
   const int m = nrows(x);
   const int n = ncols(x);
   
+  CHECK_IS_FLAG(narm);
   NEWVEC(m);
-  CALLFUN(row_maxs);
+  CALLFUN_NA(row_maxs);
   
   UNPROTECT(1);
   return ret;

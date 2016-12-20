@@ -32,10 +32,11 @@ row_means <- function(x, na.rm=FALSE) .Call(R_row_means, x, na.rm)
 #' Matrix Row/Col Min/Maxes
 #' 
 #' Row/Column minimum/maximum values. Analogues of e.g. \code{colSums()} and \code{rowSums()}.
-#' The functions handle \code{NA}'s appropriately.
 #' 
 #' @param x
 #' A numeric (integer or double) or logical matrix.
+#' @param na.rm
+#' Should \code{NA} values be removed?
 #' 
 #' @name rc_minmax
 #' @rdname rc_minmax
@@ -43,16 +44,16 @@ NULL
 
 #' @rdname rc_minmax
 #' @export
-col_mins <- function(x) .Call(R_col_mins, x)
+col_mins <- function(x, na.rm=FALSE) .Call(R_col_mins, x, na.rm)
 
 #' @rdname rc_minmax
 #' @export
-row_mins <- function(x) .Call(R_row_mins, x)
+row_mins <- function(x, na.rm=FALSE) .Call(R_row_mins, x, na.rm)
 
 #' @rdname rc_minmax
 #' @export
-col_maxs <- function(x) .Call(R_col_maxs, x)
+col_maxs <- function(x, na.rm=FALSE) .Call(R_col_maxs, x, na.rm)
 
 #' @rdname rc_minmax
 #' @export
-row_maxs <- function(x) .Call(R_row_maxs, x)
+row_maxs <- function(x, na.rm=FALSE) .Call(R_row_maxs, x, na.rm)

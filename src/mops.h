@@ -17,16 +17,16 @@ typedef const double cdbl;
 
 
 // col_minmax.cc
-int col_mins_int(cint m, cint n, cint *const restrict x, int *const restrict ret);
-int col_mins_dbl(cint m, cint n, cdbl *const restrict x, double *const restrict ret);
-int col_maxs_int(cint m, cint n, cint *const restrict x, int *const restrict ret);
-int col_maxs_dbl(cint m, cint n, cdbl *const restrict x, double *const restrict ret);
+int col_mins_int(cbool narm, cint m, cint n, cint *const restrict x, int *const restrict ret);
+int col_mins_dbl(cbool narm, cint m, cint n, cdbl *const restrict x, double *const restrict ret);
+int col_maxs_int(cbool narm, cint m, cint n, cint *const restrict x, int *const restrict ret);
+int col_maxs_dbl(cbool narm, cint m, cint n, cdbl *const restrict x, double *const restrict ret);
 
 // row_minmax.cc
-int row_mins_int(cint m, cint n, cint *const restrict x, int *const restrict ret);
-int row_mins_dbl(cint m, cint n, cdbl *const restrict x, double *const restrict ret);
-int row_maxs_int(cint m, cint n, cint *const restrict x, int *const restrict ret);
-int row_maxs_dbl(cint m, cint n, cdbl *const restrict x, double *const restrict ret);
+int row_mins_int(cbool narm, cint m, cint n, cint *const restrict x, int *const restrict ret);
+int row_mins_dbl(cbool narm, cint m, cint n, cdbl *const restrict x, double *const restrict ret);
+int row_maxs_int(cbool narm, cint m, cint n, cint *const restrict x, int *const restrict ret);
+int row_maxs_dbl(cbool narm, cint m, cint n, cdbl *const restrict x, double *const restrict ret);
 
 // col_sums.cc
 int col_sums_int(cbool narm, cint m, cint n, cint *const restrict x, int *const restrict ret);
