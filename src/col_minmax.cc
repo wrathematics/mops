@@ -24,7 +24,7 @@ static inline bool get_first(cint m, cint n, cint j, int *const restrict start, 
 }
 
 template <typename T>
-static inline int col_maxs(cint m, cint n, const T *const restrict x, T *const restrict ret)
+static inline int col_maxs_narm(cint m, cint n, const T *const restrict x, T *const restrict ret)
 {
   #pragma omp parallel for if(m*n>OMP_MIN_SIZE)
   for (int j=0; j<n; j++)
@@ -44,11 +44,7 @@ static inline int col_maxs(cint m, cint n, const T *const restrict x, T *const r
   return 0;
 }
 
-
-
-extern "C" {
-
-int col_mins_int(cint m, cint n, cint *const restrict x, int *const restrict ret)
+static inline int col_mins_int_narm(cint m, cint n, cint *const restrict x, int *const restrict ret)
 {
   #pragma omp parallel for if(m*n>OMP_MIN_SIZE)
   for (int j=0; j<n; j++)
@@ -68,7 +64,7 @@ int col_mins_int(cint m, cint n, cint *const restrict x, int *const restrict ret
   return 0;
 }
 
-int col_mins_dbl(cint m, cint n, cdbl *const restrict x, double *const restrict ret)
+static inline int col_mins_dbl_narm(cint m, cint n, cdbl *const restrict x, double *const restrict ret)
 {
   #pragma omp parallel for if(m*n>OMP_MIN_SIZE)
   for (int j=0; j<n; j++)
@@ -88,14 +84,78 @@ int col_mins_dbl(cint m, cint n, cdbl *const restrict x, double *const restrict 
   return 0;
 }
 
-int col_maxs_int(cint m, cint n, cint *const restrict x, int *const restrict ret)
+template <typename T>
+static inline int col_maxs_nonarm(cint m, cint n, const T *const restrict x, T *const restrict ret)
 {
-  return col_maxs(m, n, x, ret);
+  #pragma omp parallel for if(m*n>OMP_MIN_SIZE)
+  for (int j=0; j<n; j++)
+  {
+    ret[j] = x[m*j];
+    
+    SAFE_SIMD
+    for (int i=1; i<m; i++)
+    {
+      if (ret[j] < x[i + m*j])
+        ret[j] = x[i + m*j];
+    }
+  }
+  
+  return 0;
 }
 
-int col_maxs_dbl(cint m, cint n, cdbl *const restrict x, double *const restrict ret)
+template <typename T>
+static inline int col_mins_nonarm(cint m, cint n, const T *const restrict x, T *const restrict ret)
 {
-  return col_maxs(m, n, x, ret);
+  #pragma omp parallel for if(m*n>OMP_MIN_SIZE)
+  for (int j=0; j<n; j++)
+  {
+    ret[j] = x[m*j];
+    
+    SAFE_SIMD
+    for (int i=1; i<m; i++)
+    {
+      if (ret[j] > x[i + m*j])
+        ret[j] = x[i + m*j];
+    }
+  }
+  
+  return 0;
+}
+
+
+
+extern "C" {
+
+int col_mins_int(cbool narm, cint m, cint n, cint *const restrict x, int *const restrict ret)
+{
+  if (narm)
+    return col_mins_int_narm(m, n, x, ret);
+  else
+    return col_mins_nonarm(m, n, x, ret);
+}
+
+int col_mins_dbl(cbool narm, cint m, cint n, cdbl *const restrict x, double *const restrict ret)
+{
+  if (narm)
+    return col_mins_dbl_narm(m, n, x, ret);
+  else
+    return col_mins_nonarm(m, n, x, ret);
+}
+
+int col_maxs_int(cbool narm, cint m, cint n, cint *const restrict x, int *const restrict ret)
+{
+  if (narm)
+    return col_maxs_narm(m, n, x, ret);
+  else
+    return col_maxs_nonarm(m, n, x, ret);
+}
+
+int col_maxs_dbl(cbool narm, cint m, cint n, cdbl *const restrict x, double *const restrict ret)
+{
+  if (narm)
+    return col_maxs_narm(m, n, x, ret);
+  else
+    return col_maxs_nonarm(m, n, x, ret);
 }
 
 }
