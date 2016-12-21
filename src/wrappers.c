@@ -6,8 +6,6 @@ SEXP R_col_sums(SEXP x, SEXP narm)
 {
   SEXP ret;
   CHECK_IS_MATRIX(x);
-  const int m = nrows(x);
-  const int n = ncols(x);
   
   CHECK_IS_FLAG(narm);
   NEWVEC(n);
@@ -21,8 +19,6 @@ SEXP R_row_sums(SEXP x, SEXP narm)
 {
   SEXP ret;
   CHECK_IS_MATRIX(x);
-  const int m = nrows(x);
-  const int n = ncols(x);
   
   CHECK_IS_FLAG(narm);
   NEWVEC(m);
@@ -38,8 +34,6 @@ SEXP R_col_means(SEXP x, SEXP narm)
 {
   SEXP ret;
   CHECK_IS_MATRIX(x);
-  const int m = nrows(x);
-  const int n = ncols(x);
   
   CHECK_IS_FLAG(narm);
   PROTECT(ret = allocVector(REALSXP, n));
@@ -65,8 +59,6 @@ SEXP R_row_means(SEXP x, SEXP narm)
   SEXP ret;
   int check;
   CHECK_IS_MATRIX(x);
-  const int m = nrows(x);
-  const int n = ncols(x);
   
   CHECK_IS_FLAG(narm);
   PROTECT(ret = allocVector(REALSXP, m));
@@ -96,8 +88,6 @@ SEXP R_col_mins(SEXP x, SEXP narm)
 {
   SEXP ret;
   CHECK_IS_MATRIX(x);
-  const int m = nrows(x);
-  const int n = ncols(x);
   
   CHECK_IS_FLAG(narm);
   NEWVEC(n);
@@ -111,8 +101,6 @@ SEXP R_col_maxs(SEXP x, SEXP narm)
 {
   SEXP ret;
   CHECK_IS_MATRIX(x);
-  const int m = nrows(x);
-  const int n = ncols(x);
   
   CHECK_IS_FLAG(narm);
   NEWVEC(n);
@@ -126,8 +114,6 @@ SEXP R_row_mins(SEXP x, SEXP narm)
 {
   SEXP ret;
   CHECK_IS_MATRIX(x);
-  const int m = nrows(x);
-  const int n = ncols(x);
   
   CHECK_IS_FLAG(narm);
   NEWVEC(m);
@@ -141,12 +127,64 @@ SEXP R_row_maxs(SEXP x, SEXP narm)
 {
   SEXP ret;
   CHECK_IS_MATRIX(x);
-  const int m = nrows(x);
-  const int n = ncols(x);
   
   CHECK_IS_FLAG(narm);
   NEWVEC(m);
   CALLFUN_NA(row_maxs);
+  
+  UNPROTECT(1);
+  return ret;
+}
+
+
+
+SEXP R_col_anys(SEXP x, SEXP narm)
+{
+  SEXP ret;
+  CHECK_IS_MATRIX(x);
+  
+  CHECK_IS_FLAG(narm);
+  NEWVEC_LGL(n);
+  CALLFUN_INTRET_NA(col_anys);
+  
+  UNPROTECT(1);
+  return ret;
+}
+
+SEXP R_col_alls(SEXP x, SEXP narm)
+{
+  SEXP ret;
+  CHECK_IS_MATRIX(x);
+  
+  CHECK_IS_FLAG(narm);
+  NEWVEC_LGL(n);
+  CALLFUN_INTRET_NA(col_alls);
+  
+  UNPROTECT(1);
+  return ret;
+}
+
+SEXP R_row_anys(SEXP x, SEXP narm)
+{
+  SEXP ret;
+  CHECK_IS_MATRIX(x);
+  
+  CHECK_IS_FLAG(narm);
+  NEWVEC_LGL(m);
+  CALLFUN_INTRET_NA(row_anys);
+  
+  UNPROTECT(1);
+  return ret;
+}
+
+SEXP R_row_alls(SEXP x, SEXP narm)
+{
+  SEXP ret;
+  CHECK_IS_MATRIX(x);
+  
+  CHECK_IS_FLAG(narm);
+  NEWVEC_LGL(m);
+  CALLFUN_INTRET_NA(row_alls);
   
   UNPROTECT(1);
   return ret;

@@ -57,3 +57,39 @@ col_maxs <- function(x, na.rm=FALSE) .Call(R_col_maxs, x, na.rm)
 #' @rdname rc_minmax
 #' @export
 row_maxs <- function(x, na.rm=FALSE) .Call(R_row_maxs, x, na.rm)
+
+
+
+#' Matrix Row/Col Any/All
+#' 
+#' Row/Column any/all values. Analogues of e.g. \code{colSums()} and \code{rowSums()}.
+#' 
+#' @details
+#' If \code{na.rm=FALSE}, then \code{NA}'s are ignored.  If, for example, we 
+#' have a column of all \code{NA} values, \code{col_anys()} will return 
+#' \code{FALSE} and \code{col_all()} will return \code{TRUE}.
+#' 
+#' @param x
+#' A numeric (integer or double) or logical matrix.
+#' @param na.rm
+#' Should \code{NA} values be removed?
+#' 
+#' @name rc_anyall
+#' @rdname rc_anyall
+NULL
+
+#' @rdname rc_anyall
+#' @export
+col_anys <- function(x, na.rm=FALSE) .Call(R_col_anys, x, na.rm)
+
+#' @rdname rc_anyall
+#' @export
+row_anys <- function(x, na.rm=FALSE) .Call(R_row_anys, x, na.rm)
+
+#' @rdname rc_anyall
+#' @export
+col_alls <- function(x, na.rm=FALSE) .Call(R_col_alls, x, na.rm)
+
+#' @rdname rc_anyall
+#' @export
+row_alls <- function(x, na.rm=FALSE) .Call(R_row_alls, x, na.rm)

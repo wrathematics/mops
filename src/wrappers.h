@@ -13,12 +13,16 @@
 #define DBL(x) REAL(x)[0]
 
 #define CHECK_IS_MATRIX(x) \
-  if (!isMatrix(x)){error("argument '" #x "' must be a matrix");}
+  if (!isMatrix(x)){error("argument '" #x "' must be a matrix");} \
+  const int m = nrows(x); \
+  const int n = ncols(x);
 
 #define CHECK_IS_FLAG(x) \
   if (TYPEOF(x) != LGLSXP || LENGTH(x) != 1){error("argument '" #x "' must be a flag");}
 
 #define THROW_TYPE_ERR error("argument 'x' must be numeric or logical")
+
+#define NEWVEC_LGL(len) PROTECT(ret = allocVector(LGLSXP, len))
 
 #define NEWVEC(len) \
   switch (TYPEOF(x)){ \
@@ -40,6 +44,18 @@ switch (TYPEOF(x)){ \
     break; \
   case REALSXP: \
     fun ## _dbl(LGL(narm), m, n, DBLP(x), DBLP(ret)); \
+    break; \
+  default: \
+    THROW_TYPE_ERR;}
+
+#define CALLFUN_INTRET_NA(fun) \
+switch (TYPEOF(x)){ \
+  case LGLSXP: \
+  case INTSXP: \
+    fun ## _int(LGL(narm), m, n, INTP(x), INTP(ret)); \
+    break; \
+  case REALSXP: \
+    fun ## _dbl(LGL(narm), m, n, DBLP(x), INTP(ret)); \
     break; \
   default: \
     THROW_TYPE_ERR;}

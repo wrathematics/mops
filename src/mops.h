@@ -16,6 +16,18 @@ typedef const bool cbool;
 typedef const double cdbl;
 
 
+// col_anyall.cc
+int col_anys_int(cbool narm, cint m, cint n, cint *const restrict x, int *const restrict ret);
+int col_anys_dbl(cbool narm, cint m, cint n, cdbl *const restrict x, int *const restrict ret);
+int col_alls_int(cbool narm, cint m, cint n, cint *const restrict x, int *const restrict ret);
+int col_alls_dbl(cbool narm, cint m, cint n, cdbl *const restrict x, int *const restrict ret);
+
+// row_anyall.cc
+int row_anys_int(cbool narm, cint m, cint n, cint *const restrict x, int *const restrict ret);
+int row_anys_dbl(cbool narm, cint m, cint n, cdbl *const restrict x, int *const restrict ret);
+int row_alls_int(cbool narm, cint m, cint n, cint *const restrict x, int *const restrict ret);
+int row_alls_dbl(cbool narm, cint m, cint n, cdbl *const restrict x, int *const restrict ret);
+
 // col_minmax.cc
 int col_mins_int(cbool narm, cint m, cint n, cint *const restrict x, int *const restrict ret);
 int col_mins_dbl(cbool narm, cint m, cint n, cdbl *const restrict x, double *const restrict ret);
